@@ -33,6 +33,7 @@ class MainActivity : AppCompatActivity() {
     private var res_view: EditText? = null
     private var hyst_view: EditText? = null
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -59,94 +60,127 @@ class MainActivity : AppCompatActivity() {
 
         res_view = findViewById(R.id.res_view)
         hyst_view = findViewById(R.id.hystory_view)
-    }
-
-    @SuppressLint("SetTextI18n")
-    override fun onStart(){
-        super.onStart()
 
         var operator = ""
         var num1 = 0.0
         var num2 = 0.0
         var res = 0.0
+        var tmp = ""
 
         b_0?.setOnClickListener(){
+            tmp += "0"
             if (res_view?.text?.toString() == "") res_view?.setText("0")
             else res_view?.setText(res_view?.text.toString() + "0")
         }
         b_1?.setOnClickListener(){
+            tmp += "1"
             if (res_view?.text?.toString() == "") res_view?.setText("1")
             else res_view?.setText(res_view?.text.toString() + "1")
         }
         b_2?.setOnClickListener(){
+            tmp += "2"
             if (res_view?.text?.toString() == "") res_view?.setText("2")
             else res_view?.setText(res_view?.text.toString() + "2")
         }
         b_3?.setOnClickListener(){
+            tmp += "3"
             if (res_view?.text?.toString() == "") res_view?.setText("3")
             else res_view?.setText(res_view?.text.toString() + "3")
         }
         b_4?.setOnClickListener(){
+            tmp += "4"
             if (res_view?.text?.toString() == "") res_view?.setText("4")
             else res_view?.setText(res_view?.text.toString() + "4")
         }
         b_5?.setOnClickListener(){
+            tmp += "5"
             if (res_view?.text?.toString() == "") res_view?.setText("5")
             else res_view?.setText(res_view?.text.toString() + "5")
         }
         b_6?.setOnClickListener(){
+            tmp += "6"
             if (res_view?.text?.toString() == "") res_view?.setText("6")
             else res_view?.setText(res_view?.text.toString() + "6")
         }
         b_7?.setOnClickListener(){
+            tmp += "7"
             if (res_view?.text?.toString() == "") res_view?.setText("7")
             else res_view?.setText(res_view?.text.toString() + "7")
         }
         b_8?.setOnClickListener(){
+            tmp += "8"
             if (res_view?.text?.toString() == "") res_view?.setText("8")
             else res_view?.setText(res_view?.text.toString() + "8")
         }
         b_9?.setOnClickListener(){
+            tmp += "9"
             if (res_view?.text?.toString() == "") res_view?.setText("9")
             else res_view?.setText(res_view?.text.toString() + "9")
         }
-        b_dot?.setOnClickListener(){
-            if (res_view?.text?.toString() == "") res_view?.setText("0.")
-            else if ("." in res_view?.text.toString()) res_view?.setText(res_view?.text.toString() + "")
-            else res_view?.setText(res_view?.text.toString() + ".")
-        }
-        b_div?.setOnClickListener(){
-            if (num1 == 0.0) num1 = res_view?.text.toString().toDouble()
-            else {
-                num2 = res_view?.text.toString().toDouble()
-            if (res_view?.text?.toString() == "") res_view?.setText("0/")
-            else res_view?.setText(res_view?.text.toString() + "/")
-            operator = "/"
-//                res = num1/num2
-//                res_view?.setText(res.toString())
-            }
 
+        b_dot?.setOnClickListener(){
+            when{
+                tmp == "" -> {
+                    tmp += "0."
+                    res_view?.setText(res_view?.text.toString() + "0.")
+                }
+                "." !in tmp -> {
+                    tmp += "."
+                    res_view?.setText(res_view?.text.toString() + ".")
+                }
+            }
         }
-        b_equal?.setOnClickListener(){
-            res = num1/num2
-            num1 = 0.0
-            num2 = 0.0
-            res_view?.setText(res.toString())
+
+        b_div?.setOnClickListener(){
+            if (operator == "") {
+                operator = "/"
+                if (num1 == 0.0) num1 = tmp.toDouble()
+                tmp = ""
+                if (res_view?.text?.toString() == "") {
+                    res_view?.setText("0/")
+                } else {
+                    res_view?.setText(res_view?.text.toString() + "/")
+                }
+            }
         }
         b_plus?.setOnClickListener(){
-            if (res_view?.text?.toString() == "") res_view?.setText("0+")
-            else res_view?.setText(res_view?.text.toString() + "+")
-            operator = "+"
+            if (operator == "") {
+                operator = "+"
+                if (num1 == 0.0) num1 = tmp.toDouble()
+                tmp = ""
+                if (res_view?.text?.toString() == "") {
+                    res_view?.setText("0+")
+                } else {
+                    res_view?.setText(res_view?.text.toString() + "+")
+                }
+            }
         }
-        b_minus?.setOnClickListener(){
-            if (res_view?.text?.toString() == "") res_view?.setText("0-")
-            else res_view?.setText(res_view?.text.toString() + "-")
-            operator = "-"
+        b_minus?.setOnClickListener() {
+            if (tmp == ""){
+                tmp += "-"
+            }
+            if (operator == "") {
+                operator = "-"
+                if (num1 == 0.0) num1 = tmp.toDouble()
+                tmp = ""
+                if (res_view?.text?.toString() == "") {
+                    res_view?.setText("0-")
+                } else {
+                    res_view?.setText(res_view?.text.toString() + "-")
+                }
+            }
         }
         b_multy?.setOnClickListener(){
-            if (res_view?.text?.toString() == "") res_view?.setText("0*")
-            else res_view?.setText(res_view?.text.toString() + "*")
-            operator = "*"
+            if (operator == "") {
+                operator = "*"
+                if (num1 == 0.0) num1 = tmp.toDouble()
+                tmp = ""
+                if (res_view?.text?.toString() == "") {
+                    res_view?.setText("0*")
+                } else {
+                    res_view?.setText(res_view?.text.toString() + "*")
+                }
+            }
         }
         b_wdtfs?.setOnClickListener(){
             if (res_view?.text?.toString() == "") res_view?.setText("")
@@ -161,10 +195,29 @@ class MainActivity : AppCompatActivity() {
 
         b_del?.setOnClickListener(){
             res_view?.setText(res_view!!.text?.dropLast(1).toString())
+            tmp = tmp.dropLast(1)
         }
-        b_AC?.setOnClickListener(){
+        b_AC?.setOnClickListener() {
             res_view?.setText("")
+            tmp = ""
+            num1 = 0.0
+            num2 = 0.0
+        }
+
+
+        b_equal?.setOnClickListener(){
+            num2 = tmp.toDouble()
+            when (operator) {
+                "/" -> res = num1 / num2
+                "*" -> res = num1 * num2
+                "+" -> res = num1 + num2
+                "-" -> res = num1 - num2
+            }
+            operator = ""
+            tmp = ""
+            num1 = res
+            num2 = 0.0
+            res_view?.setText(res.toString())
         }
     }
-
 }
