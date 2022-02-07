@@ -134,52 +134,49 @@ class MainActivity : AppCompatActivity() {
         b_div?.setOnClickListener(){
             if (operator == "") {
                 operator = "/"
-                if (num1 == 0.0) num1 = tmp.toDouble()
-                tmp = ""
-                if (res_view?.text?.toString() == "") {
-                    res_view?.setText("0/")
-                } else {
+                if (tmp != "") {
+                    num1 = tmp.toDouble()
                     res_view?.setText(res_view?.text.toString() + "/")
-                }
+                }else res_view?.setText("0/")
+            tmp = ""
             }
         }
         b_plus?.setOnClickListener(){
             if (operator == "") {
                 operator = "+"
-                if (num1 == 0.0) num1 = tmp.toDouble()
-                tmp = ""
-                if (res_view?.text?.toString() == "") {
-                    res_view?.setText("0+")
-                } else {
+                if (tmp != "") {
+                    num1 = tmp.toDouble()
                     res_view?.setText(res_view?.text.toString() + "+")
-                }
+                }else res_view?.setText("0+")
+                tmp = ""
             }
         }
         b_minus?.setOnClickListener() {
-            if (tmp == ""){
-                tmp += "-"
-            }
             if (operator == "") {
                 operator = "-"
-                if (num1 == 0.0) num1 = tmp.toDouble()
-                tmp = ""
-                if (res_view?.text?.toString() == "") {
-                    res_view?.setText("0-")
-                } else {
+                if (tmp != "") {
+                    num1 = tmp.toDouble()
                     res_view?.setText(res_view?.text.toString() + "-")
+                    tmp = ""
+                }else {
+                    res_view?.setText("-")
+                    tmp = "-"
+                    operator = ""
                 }
+            }
+            else{
+                tmp = "-"
+                res_view?.setText(res_view?.text.toString() + "-")
             }
         }
         b_multy?.setOnClickListener(){
             if (operator == "") {
                 operator = "*"
-                if (num1 == 0.0) num1 = tmp.toDouble()
-                tmp = ""
-                if (res_view?.text?.toString() == "") {
-                    res_view?.setText("0*")
-                } else {
+                if (tmp != "") {
+                    num1 = tmp.toDouble()
                     res_view?.setText(res_view?.text.toString() + "*")
-                }
+                }else res_view?.setText("0*")
+                tmp = ""
             }
         }
         b_wdtfs?.setOnClickListener(){
@@ -187,9 +184,15 @@ class MainActivity : AppCompatActivity() {
             else res_view?.setText(res_view?.text.toString() + "")
         }
         b_percent?.setOnClickListener(){
-            if (res_view?.text?.toString() == "") res_view?.setText("Херушки")
-            else res_view?.setText(res_view?.text.toString() + "%")
-            operator = "%"
+            if (operator != "") {
+                if (tmp != ""){
+                    num2 = tmp.toDouble()
+                    when (operator) {
+                        "/" -> res = num1 / (num2 / 100)
+                    }
+                }
+            }
+            res_view?.setText(res.toString())
         }
 
 
@@ -199,6 +202,7 @@ class MainActivity : AppCompatActivity() {
         }
         b_AC?.setOnClickListener() {
             res_view?.setText("")
+            operator = ""
             tmp = ""
             num1 = 0.0
             num2 = 0.0
@@ -214,7 +218,7 @@ class MainActivity : AppCompatActivity() {
                 "-" -> res = num1 - num2
             }
             operator = ""
-            tmp = ""
+            tmp = res.toString()
             num1 = res
             num2 = 0.0
             res_view?.setText(res.toString())
