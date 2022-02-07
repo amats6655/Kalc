@@ -189,7 +189,14 @@ class MainActivity : AppCompatActivity() {
                     num2 = tmp.toDouble()
                     when (operator) {
                         "/" -> res = num1 / (num2 / 100)
+                        "*" -> res = num1 * (num2 / 100)
+                        "+" -> res = num1 + (num1 / 100 * num2)
+                        "-" -> res = num1 - (num1 / 100 * num2)
                     }
+                    operator = ""
+                    tmp = res.toString()
+                    num1 = res
+                    num2 = 0.0
                 }
             }
             res_view?.setText(res.toString())
