@@ -12,15 +12,17 @@
         android:orientation="vertical">
 
         <EditText
-            android:id="@+id/hystory_view"
+            android:id="@+id/history_view"
+            android:background="@null"
             android:layout_width="match_parent"
             android:layout_height="250sp"
-            android:editable="false"
             android:layout_marginStart="20sp"
-            android:textColor="@color/white"
-            android:textSize="20sp"
+            android:editable="false"
+            android:importantForAutofill="no"
             android:inputType="none"
-            android:importantForAutofill="no" />
+            android:textColor="@color/white"
+            android:textIsSelectable="true"
+            android:textSize="20sp" />
 
         <View
             android:layout_width="match_parent"
@@ -29,16 +31,18 @@
 
         <EditText
             android:id="@+id/res_view"
+            android:background="@null"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20sp"
             android:editable="false"
             android:gravity="end"
+            android:importantForAutofill="no"
+            android:inputType="none"
             android:singleLine="true"
             android:textColor="@color/white"
-            android:textSize="60sp"
-            android:importantForAutofill="no"
-            android:inputType= "none" />
+            android:textIsSelectable="true"
+            android:textSize="60sp" />
 
         <View
             android:layout_width="match_parent"
@@ -96,7 +100,6 @@
                     android:layout_height="70sp"
                     android:insetLeft="5sp"
                     android:insetRight="5sp"
-                    android:text="@string/full"
                     android:textSize="20sp"
                     style="?android:attr/buttonBarButtonStyle" />
             </TableRow>
