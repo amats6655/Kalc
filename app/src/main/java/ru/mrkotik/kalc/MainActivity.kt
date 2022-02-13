@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
     private var b_wdtfs: Button? = null
 
     private var res_view: EditText? = null
-    private var hyst_view: EditText? = null
+    private var hist_view: EditText? = null
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -59,7 +59,7 @@ class MainActivity : AppCompatActivity() {
         b_wdtfs = findViewById(R.id.b_wdtfs)
 
         res_view = findViewById(R.id.res_view)
-        hyst_view = findViewById(R.id.hystory_view)
+        hist_view = findViewById(R.id.history_view)
 
         var operator = ""
         var num1 = 0.0
@@ -224,6 +224,7 @@ class MainActivity : AppCompatActivity() {
                 "+" -> res = num1 + num2
                 "-" -> res = num1 - num2
             }
+            hist_view?.setText(hist_view?.text.toString() + "\n" + num1.toString() + operator + num2.toString() + "=" + res.toString())
             operator = ""
             tmp = res.toString()
             num1 = res
